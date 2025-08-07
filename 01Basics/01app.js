@@ -29,3 +29,19 @@ bulkAdd(1, 2, 3, 4, 5);
 bulkAdd(10, 20, 30, 40, 50, 60);
 bulkAdd(100, 200, 300, 400, 500, 600, 700);
 
+
+
+
+let fs = require('fs');
+
+let filePath = 'example.txt';
+
+let content = "Hello, this is a test file.\nThis file is created using Node.js.";
+
+fs.writeFileSync(filePath, content, (err) => {
+    if (err) {
+        console.error("Error writing to file:", err);
+    } else {
+        console.log("File written successfully.");
+    }
+});
