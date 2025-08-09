@@ -20,7 +20,7 @@ http.createServer((request, response) => {
             body.push(chunk);
         });
         request.on('end', () => {
-            const bodyData = Buffer.concat(body).toString();
+            let bodyData = Buffer.concat(body).toString();
             console.log('Form Data Received:', bodyData);
             response.writeHead(200, { 'Content-Type': 'text/html' });
             response.write('<h1>Form Submitted</h1>');
