@@ -13,7 +13,7 @@ function submitPage (req, res) {
     req.on('end', () => {
         let bodyData = Buffer.concat(body).toString();
         bodyData = querystring.parse(bodyData);
-   
+        console.log('Form Data Received:', bodyData);
 
         res.write('<h1>Form Submitted</h1>');
         res.write(`<p>Username: ${bodyData.username}</p>`);
