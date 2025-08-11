@@ -1,0 +1,39 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+}
+
+#nav-div {
+    width: 100vw;
+    height: 40px;
+    color: aliceblue;
+    background-color: rgb(252, 189, 0);
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+.navbarlist-container{
+    flex-direction: row;
+    padding: 1px;
+    list-style: none;
+    padding: 2px;
+    margin: 5px;
+}
+
+.logo {
+    color: black;
+}
+
+.navbar-list {
+    display: inline;
+    margin-left: 20px;
+    color: white;
+    padding: 5px;
+    margin-top: 2px;
+}
