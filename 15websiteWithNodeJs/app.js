@@ -6,6 +6,7 @@ const { error } = require('console');
 http.createServer((request, response) => {
 
     const commonHeadeData = fs.readFileSync("pages/header.html", "utf-8")
+    const commonFooterData = fs.readFileSync("pages/footer.html", "utf-8")
 
     // ------------------
 
@@ -25,7 +26,7 @@ http.createServer((request, response) => {
                 return false
             }else {
                 response.writeHead(200, {"Content-Type" : "text/html"});
-                response.write(commonHeadeData+" "+data);
+                response.write(commonHeadeData+" "+ data + commonFooterData);
                 response.end();
             }
         })

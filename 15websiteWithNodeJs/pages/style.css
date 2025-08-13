@@ -87,3 +87,30 @@ body {
     background-color: black;
     color: white;
 }
+
+/* Footer Container */
+
+#footer-container {
+    height: 80px;
+    width: 100vw;
+    background-color: rgb(53, 53, 53);
+    display: flex;
+    flex-direction: column;
+    color: rgb(255, 255, 255);
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+#footer-container :nth-child(1) {
+    color: rgb(250, 150, 0);
+    font-size: smaller;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+}
+
+#footer-container :nth-child(2) {
+    color: rgb(250, 150, 0);
+    font-size: smaller;
+}
+
+

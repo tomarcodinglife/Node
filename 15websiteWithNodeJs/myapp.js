@@ -1,10 +1,11 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const servercode = 3958
 
 // Header file ek baar read
-const servercode = 3958
 const headerHTML = fs.readFileSync("pages/header.html", "utf-8");
+const footerHTML = fs.readFileSync("pages/footer.html", "utf-8");
 
 http.createServer((request, response) => {
     let filePath = request.url === "/" ? "pages/index.html" : "pages" + request.url;
@@ -31,7 +32,7 @@ http.createServer((request, response) => {
             }
         } else {
             if (contentType === "text/html") {
-                data = headerHTML + data; // Header add
+                data = headerHTML + data + footerHTML; // Header & footer add
             }
             response.writeHead(200, {"Content-Type": contentType});
             response.end(data);
