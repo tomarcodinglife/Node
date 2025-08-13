@@ -53,7 +53,7 @@ server.listen(PORT, () => {
 
 ### 📂 Project Structure
 
-```terminal
+```plaintext
 
 project-folder/
 │
