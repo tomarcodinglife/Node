@@ -58,12 +58,13 @@ server.listen(PORT, () => {
 project-folder/
 │
 ├── server.js
-├── pages/
-│   ├── header.html
-│   ├── index.html
-│   ├── about.html
-│   ├── contact.html
-│   ├── style.css
+└── pages/
+    ├── header.html
+    ├── footer.html
+    ├── index.html
+    ├── about.html
+    ├── contact.html
+    └── style.css
 
 ```
 
@@ -81,9 +82,11 @@ http.createServer((req, res) => {
     let filePath = '';
     let contentType = 'text/html';
 
-    // Load common header
+    // Common header and footer
     const headerHTML = fs.readFileSync(path.join(__dirname, 'pages', 'header.html'), 'utf-8');
+    const footerHTML = fs.readFileSync(path.join(__dirname, 'pages', 'footer.html'), 'utf-8');
 
+    // Routing
     if (req.url === '/' || req.url === '/index') {
         filePath = path.join(__dirname, 'pages', 'index.html');
     } 
@@ -103,14 +106,16 @@ http.createServer((req, res) => {
         return;
     }
 
+    // Read and send the file
     fs.readFile(filePath, 'utf-8', (err, data) => {
         if (err) {
             res.writeHead(500, { 'Content-Type': 'text/plain' });
             res.end('Internal Server Error');
         } else {
             res.writeHead(200, { 'Content-Type': contentType });
+
             if (contentType === 'text/html') {
-                res.write(headerHTML + data);
+                res.write(headerHTML + data + footerHTML);
             } else {
                 res.write(data);
             }
@@ -122,61 +127,96 @@ http.createServer((req, res) => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
 
+
 ```
 
 ### Header File
 ``` html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My Website</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1>My Node.js Website</h1>
+        <nav>
+            <a href="/">Home</a> |
+            <a href="/about">About</a> |
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+    <hr>
+```
 
-<header style="background:#333;color:#fff;padding:10px;">
-    <h1>My Website</h1>
-    <nav>
-        <a href="/" style="color:white;">Home</a> |
-        <a href="/about" style="color:white;">About</a> |
-        <a href="/contact" style="color:white;">Contact</a>
-    </nav>
-</header>
-<hr>
-
+### Footer File
+``` html
+  <hr>
+    <footer>
+        <p>&copy; 2025 My Website. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
 ```
 
 ### index File
 ``` html
-
-<h2>Welcome to Home Page</h2>
-<p>This is the main content of the website.</p>
+<main>
+    <h2>Welcome to the Home Page</h2>
+    <p>This is the homepage of our simple Node.js website.</p>
+</main>
 
 ```
 
 ### about File
 ``` html
-
-<h2>About Us</h2>
-<p>We are learning Node.js static file serving.</p>
+<main>
+    <h2>About Us</h2>
+    <p>We are learning Node.js server-side rendering with static files.</p>
+</main>
 
 ```
 
 ### contact file
 
 ```html
-
-<h2>Contact Us</h2>
-<p>Email: contact@example.com</p>
+<main>
+    <h2>Contact Us</h2>
+    <p>Email: example@example.com</p>
+</main>
 
 ```
 
 
-### contact file
+### css file
 ```css
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 20px;
+    margin: 20px;
+    background: #f2f2f2;
 }
-h2 {
-    color: #333;
+header, footer {
+    background: #333;
+    color: white;
+    padding: 10px;
 }
+header a {
+    color: yellow;
+    text-decoration: none;
+    margin: 0 5px;
+}
+header a:hover {
+    text-decoration: underline;
+}
+main {
+    padding: 10px;
+    background: white;
+    border-radius: 5px;
+}
+
 
 ```
 
