@@ -5,7 +5,7 @@ const { error } = require('console');
 
 http.createServer((request, response) => {
 
-    let commonHeadeData = fs.readFileSync("pages/header.html", "utf-8")
+    const commonHeadeData = fs.readFileSync("pages/header.html", "utf-8")
 
     // ------------------
 
