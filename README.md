@@ -1,5 +1,127 @@
 # 05_node.js
 
+## 🌐 Create a Server & Read/Write File in Node.js
+
+यह example दिखाता है कि कैसे Node.js में एक HTTP server बनाया जाए और `fs` module का इस्तेमाल करके file read/write किया जाए।
+
+### Example Code
+
+```js
+const http = require('http');
+const fs = require('fs');
+
+// Create HTTP Server
+const server = http.createServer((req, res) => {
+    if (req.url === '/write') {
+        // Write to file
+        fs.writeFile('example.txt', 'Hello from Node.js!', (err) => {
+            if (err) {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                return res.end('❌ Error writing file.');
+            }
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
+            res.end('✅ File written successfully.');
+        });
+
+    } else if (req.url === '/read') {
+        // Read file
+        fs.readFile('example.txt', 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                return res.end('❌ Error reading file.');
+            }
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
+            res.end(`📄 File Content: ${data}`);
+        });
+
+    } else {
+        // Default Route
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end('Welcome! Use /write to create a file and /read to read it.');
+    }
+});
+
+// Start Server
+const PORT = 3000;
+server.listen(PORT, () => {
+    console.log(`🚀 Server running at http://localhost:${PORT}`);
+});
+```
+
+
+## "Node.js HTTP Server with Multiple Pages, Common Header, and CSS Support"
+
+### 📂 Project Structure
+
+project-folder/
+│
+├── server.js
+├── pages/
+│   ├── header.html
+│   ├── index.html
+│   ├── about.html
+│   ├── contact.html
+│   ├── style.css
+---
+
+### Code
+
+```js
+
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+const PORT = 3000;
+
+http.createServer((req, res) => {
+    let filePath = '';
+    let contentType = 'text/html';
+
+    // Load common header
+    const headerHTML = fs.readFileSync(path.join(__dirname, 'pages', 'header.html'), 'utf-8');
+
+    if (req.url === '/' || req.url === '/index') {
+        filePath = path.join(__dirname, 'pages', 'index.html');
+    } 
+    else if (req.url === '/about') {
+        filePath = path.join(__dirname, 'pages', 'about.html');
+    } 
+    else if (req.url === '/contact') {
+        filePath = path.join(__dirname, 'pages', 'contact.html');
+    }
+    else if (req.url === '/style.css') {
+        filePath = path.join(__dirname, 'pages', 'style.css');
+        contentType = 'text/css';
+    }
+    else {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('404 Page Not Found');
+        return;
+    }
+
+    fs.readFile(filePath, 'utf-8', (err, data) => {
+        if (err) {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end('Internal Server Error');
+        } else {
+            res.writeHead(200, { 'Content-Type': contentType });
+            if (contentType === 'text/html') {
+                res.write(headerHTML + data);
+            } else {
+                res.write(data);
+            }
+            res.end();
+        }
+    });
+
+}).listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+});
+
+```
+
+
 ## 📂 File System Related Error Codes
 
 | Error Code  | Meaning                       | When It Happens |
