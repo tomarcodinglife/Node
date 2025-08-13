@@ -124,6 +124,85 @@ http.createServer((req, res) => {
 
 ```
 
+### Header File
+``` html
+
+<header style="background:#333;color:#fff;padding:10px;">
+    <h1>My Website</h1>
+    <nav>
+        <a href="/" style="color:white;">Home</a> |
+        <a href="/about" style="color:white;">About</a> |
+        <a href="/contact" style="color:white;">Contact</a>
+    </nav>
+</header>
+<hr>
+
+```
+
+### index File
+``` html
+
+<h2>Welcome to Home Page</h2>
+<p>This is the main content of the website.</p>
+
+```
+
+### about File
+``` html
+
+<h2>About Us</h2>
+<p>We are learning Node.js static file serving.</p>
+
+```
+
+### contact file
+
+```html
+
+<h2>Contact Us</h2>
+<p>Email: contact@example.com</p>
+
+```
+
+
+### contact file
+```css
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+h2 {
+    color: #333;
+}
+
+```
+
+### Run Project
+
+#### through node
+
+```bash
+node server.js
+
+```
+
+#### Run with Nodemon
+
+##### Install nodemon globally (only first time):
+```bash
+    npm install -g nodemon
+```
+
+##### Start the server with nodemon:
+```bash
+    nodemon server.js
+```
+
+
+
 
 ## 📂 File System Related Error Codes
 
